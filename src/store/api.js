@@ -55,7 +55,7 @@ export default {
             }
 
             return {
-              id: item.nid,
+              id: item.id,
               name: item.n,
               score
             }

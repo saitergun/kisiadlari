@@ -1,0 +1,99 @@
+$font-family-sans-serif: "Space Mono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+$theme-colors: (
+  "primary": #00B5E6, // iyi parti logo @ https://iyiparti.org.tr/Assets/KurumsalKimlik/Logo/iyi-mavi-dikey.zip
+  "primary-alternative": #FFD900, // iyi parti logo @ https://iyiparti.org.tr/Assets/KurumsalKimlik/Logo/iyi-mavi-dikey.zip
+  "female": #fc5c65, // fusion red @ flatuicolors.com/palette/de
+  "male": #45aaf2, // high blue @ flatuicolors.com/palette/de
+  "unisex": #a55eea, // lighter purple @ flatuicolors.com/palette/de
+);
+
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 419.998px,
+//   md: 419.999px,
+//   lg: 420px
+// );
+
+// $container-max-widths: (
+//   sm: 419.998px,
+//   md: 419.999px,
+//   lg: 420px
+// );
+
+@import '~bootstrap/scss/bootstrap.scss';
+
+.custom-control-textless {
+  min-height: 0;
+  padding: 0;
+
+  .custom-control-label {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0
+    }
+  }
+
+  &.custom-switch {
+    .custom-control-label {
+      width: 1.75rem;
+      cursor: pointer;
+
+      &::after {
+        position: absolute;
+        left: 0.15rem;
+        top: 0.125rem
+      }
+    }
+
+    .custom-control-input:checked ~ .custom-control-label::after {
+      transform: translateX(.75rem)
+    }
+  }
+
+  &.custom-control-circle:not(.custom-switch) {
+    .custom-control-label {
+      &::before {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &.custom-control-shadowless {
+    .custom-control-input:focus ~ .custom-control-label::before {
+      box-shadow: none !important
+    }
+  }
+}
+
+.user-select-none { user-select: none !important }
+
+.cursor-pointer { cursor: pointer !important }
+.cursor-default { cursor: default !important }
+
+.line-height-1 { line-height: 1 !important }
+.line-height-normal { line-height: normal !important }
+
+.rounded-left-0 { border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important }
+.rounded-right-0 { border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important }
+.rounded-top-0 { border-top-left-radius: 0 !important; border-top-right-radius: 0 !important }
+.rounded-bottom-0 { border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important }
+
+// .placeholder-light {
+//   &::placeholder {
+//     color: lighten($body-color, 50%) !important
+//   }
+// }
+
+.marker {
+  background-color: lighten(yellow, 35%) !important
+}

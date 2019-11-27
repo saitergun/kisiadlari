@@ -25,7 +25,7 @@ export default {
 
     names: [],
 
-    dataLastUpdateDate: 1560203445881
+    dataLastUpdateDate: 1574834015273
   },
 
   getters: {},

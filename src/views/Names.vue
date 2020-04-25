@@ -1,6 +1,6 @@
 <template>
   <main class="container p-3">
-    <section class="bg-white shadow-sm rounded-lg border border-white">
+    <section class="bg-white shadow-sm rounded-lg border">
       <span class="d-block position-relative">
         <input type="text" class="form-control form-control-lg rounded-lg placeholder-light py-2 px-4 h-auto border-0 text-center shadow-none" placeholder="ad ve anlam içinde ara" v-model="filter.query" @keyup.enter="$event.srcElement.blur(), filter.page = 1, updateRoute()" />
 

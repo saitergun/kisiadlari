@@ -1,3 +1,5 @@
+import names from '../data/names.json'
+
 export default {
   namespaced: true,
 
@@ -23,9 +25,7 @@ export default {
       { id: 3, name: 'Unisex', nameLocale: 'Üniseks' }
     ],
 
-    names: [],
-
-    dataLastUpdateDate: 1574834015273
+    names: []
   },
 
   getters: {},
@@ -74,22 +74,17 @@ export default {
       })
     },
 
-    async set ({ commit, rootState }) {
+    async set ({ commit }) {
       return new Promise((resolve, reject) => {
-        fetch(rootState.app.publicPath + 'data/names.json').then(response => response.json()).then(response => {
-          try {
-            commit('pushNames', response)
+        try {
+          commit('pushNames', names)
 
-            localStorage.setItem('kasData', JSON.stringify(response))
-            localStorage.setItem('kasDataLastUpdate', Date.now())
+          resolve()
+        } catch (e) {
+          const error = 'verileri tarayıcına kaydedemedik. muhtemel olarak kapatıp açınca düzelir.'
 
-            resolve()
-          } catch (e) {
-            const error = 'verileri tarayıcına kaydedemedik. muhtemel olarak kapatıp açınca düzelir.'
-
-            reject(error)
-          }
-        }).catch(error => reject(error))
+          reject(error)
+        }
       })
     }
   }

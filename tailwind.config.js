@@ -1,11 +1,11 @@
 // https://raw.githubusercontent.com/tailwindcss/tailwindcss/master/stubs/defaultConfig.stub.js
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'space-mono': ['Space Mono', ...defaultTheme.fontFamily.mono],
+        'space-mono': ['Space Mono', ...defaultTheme.fontFamily.mono]
       },
 
       colors: {
@@ -36,32 +36,32 @@ module.exports = {
 
         female: '#fc5c65', // fusion red @ flatuicolors.com/palette/de
         male: '#45aaf2', // high blue @ flatuicolors.com/palette/de
-        unisex: '#a55eea', // lighter purple @ flatuicolors.com/palette/de
+        unisex: '#a55eea' // lighter purple @ flatuicolors.com/palette/de
       },
 
       screens: {
         sm: '481px',
         md: '769px',
         lg: '1025px',
-        xl: '1281px',
-      },
-    },
+        xl: '1281px'
+      }
+    }
   },
 
   variants: {
-    backgroundColor: ['hover', 'active', 'focus'], // ['responsive', 'hover', 'focus']
+    backgroundColor: ['hover', 'active', 'focus'] // ['responsive', 'hover', 'focus']
   },
 
   corePlugins: {
-    container: false,
+    container: false
   },
 
   purge: {
-    enabled: false,
+    enabled: process.env.NODE_ENV === 'production',
     content: [
       './public/*.html',
       './src/**/*.vue',
       './src/**/*.js'
-    ],
-  },
-};
+    ]
+  }
+}

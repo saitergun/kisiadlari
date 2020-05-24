@@ -1,12 +1,12 @@
 <template>
-  <main class="container p-3">
+  <main class="container mx-auto">
     <section class="bg-white shadow-sm rounded">
-      <header class="px-3 py-2">
-        <h1 class="m-0 line-height-1">sayfa bulunamadı</h1>
+      <header class="py-2 px-4">
+        <h1 class="text-4xl">sayfa bulunamadı</h1>
       </header>
 
-      <main class="border-top border-light px-3 py-2">
-        <p class="m-0">böyle bir sayfa yok. daha önce de hiç olmadı.</p>
+      <main class="py-3 px-4">
+        <p>böyle bir sayfa yok. daha önce de hiç olmadı.</p>
       </main>
     </section>
   </main>

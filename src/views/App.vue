@@ -1,27 +1,40 @@
 <template>
   <span>
-    <span class="position-fixed w-100 h-100 d-flex align-items-center justify-content-center" v-if="!isReady && !errorText">
-      <span class="p-4 text-primary text-center">
-        <span class="spinner-border text-primary" />
-        <div class="mt-4 font-weight-bolder"><span>yükleniyor</span></div>
+    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="!isReady && !errorText">
+      <span class="text-center text-primary p-4">
+        <span class="text-2xl font-bold mt-4">yükleniyor</span>
       </span>
     </span>
 
-    <span class="position-fixed w-100 h-100 d-flex align-items-center justify-content-center" v-if="errorText">
-      <span class="p-4 text-danger text-center">
-        <span class="d-flex align-items-center justify-content-center bg-danger text-white line-height-1 rounded-circle m-auto" :style="{ fontSize: '3rem', width: '50px', height: '50px' }">!</span>
-        <div class="mt-4">{{ errorText }}</div>
+    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="errorText">
+      <span class="text-center text-red-600 p-4">
+        <span class="w-12 h-12 flex items-center justify-center bg-red-500 text-white leading-none text-4xl rounded-full m-auto">!</span>
+
+        <span class="block mt-5">{{ errorText }}</span>
       </span>
     </span>
 
-    <nav class="navbar navbar-dark sticky-top bg-primary p-2" v-if="isReady">
-      <span class="container d-flex justify-content-center">
-        <h1 class="navbar-brand m-0 p-1 line-height-1 cursor-pointer user-select-none" :title="name" v-if="$route.name === 'routeHome'">{{ name }}</h1>
-        <router-link class="navbar-brand m-0 p-1 line-height-1" to="/" :title="name" v-else>{{ name }}</router-link>
+    <nav class="sticky left-0 top-0 right-0 w-full h-12 flex items-center justify-center bg-primary shadow z-40" v-if="isReady">
+      <span class="flex items-center justify-center relative w-full h-12 max-w-md px-4">
+        <h1
+          class="block text-center text-xl text-white cursor-pointer p-2"
+          :title="name"
+          v-if="$route.name === 'routeHome'"
+        >{{ name }}</h1>
+
+        <router-link
+          class="block text-center text-xl text-white cursor-pointer p-2"
+          to="/"
+          :title="name"
+          v-else
+        >{{ name }}</router-link>
       </span>
     </nav>
 
-    <router-view :key="$route.fullPath" v-if="isReady" />
+    <router-view
+      :key="$route.fullPath"
+      v-if="isReady"
+    />
   </span>
 </template>
 
@@ -40,17 +53,7 @@ export default {
   },
 
   created () {
-    document.body.classList.add('bg-light')
-
     this.$store.dispatch('app/start')
   }
 }
 </script>
-
-<style lang="scss">
-  @import '../assets/scss/app.scss';
-
-  .container {
-    max-width: 420px;
-  }
-</style>

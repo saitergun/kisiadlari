@@ -1,0 +1,7 @@
+.container {
+  @apply max-w-md p-4 mx-auto;
+
+  @screen sm {
+    @apply px-0;
+  }
+}

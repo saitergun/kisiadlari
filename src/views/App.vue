@@ -40,17 +40,7 @@ export default {
   },
 
   created () {
-    document.body.classList.add('bg-light')
-
     this.$store.dispatch('app/start')
   }
 }
 </script>
-
-<style lang="scss">
-  @import '../assets/scss/app.scss';
-
-  .container {
-    max-width: 420px;
-  }
-</style>

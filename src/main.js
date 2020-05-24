@@ -3,7 +3,10 @@ import App from './views/App.vue'
 
 import router from './router'
 import store from './store'
+
 import './registerServiceWorker'
+
+import './assets/scss/app.scss'
 
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'

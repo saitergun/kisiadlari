@@ -1,78 +1,106 @@
 <template>
-  <main class="container p-3">
-    <section class="bg-white shadow-sm rounded-lg" v-if="!loading && !item">
-      <header class="px-3 py-2">
-        <h1 class="m-0 line-height-1">ad bulunamadı</h1>
+  <main class="container space-y-4">
+    <section class="bg-white shadow-sm rounded" v-if="!loading && !item">
+      <header class="py-2 px-4">
+        <h1 class="text-4xl">ad bulunamadı</h1>
       </header>
 
-      <main class="border-top border-light px-3 py-3">
-        <p class="m-0 line-height-1">aradığın ad burada yok. daha önce varsa da silinmiş.</p>
+      <main class="py-3 px-4">
+        <p>aradığın ad burada yok. daha önce varsa da silinmiş.</p>
       </main>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg" v-if="!loading && item">
-      <header class="px-3 py-2">
-        <h1 class="m-0 line-height-1">{{ item.name | upperCaseIt }}</h1>
+    <section class="bg-white shadow-sm rounded" v-if="!loading && item">
+      <header class="py-2 px-4">
+        <h1 class="text-4xl">{{ item.name | upperCaseIt }}</h1>
       </header>
 
-      <main class="list-group list-group-flush">
-        <span class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-light line-height-1 p-3" v-if="item.pronunciation">
+      <main class="flex flex-col divide-y divide-gray-100">
+        <span class="flex items-center justify-between py-3 px-4" v-if="item.pronunciation">
           <span>söyleyiş</span>
+
           <span>{{ item.pronunciation | lowerCaseIt }}</span>
         </span>
 
-        <span class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-light line-height-1 p-3" v-if="item.gender">
+        <span class="flex items-center justify-between py-3 px-4" v-if="item.gender">
           <span>cinsiyet</span>
-          <span>
-            <span>{{ item.gender.nameLocale | lowerCaseIt }}</span>
-          </span>
+
+          <span>{{ item.gender.nameLocale | lowerCaseIt }}</span>
         </span>
 
-        <span class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-light line-height-1 px-3 py-2" v-if="!loading && item.origins.length && !item.namesSeparately.length">
+        <span class="flex items-center justify-between py-2 px-4" v-if="!loading && item.origins.length && !item.namesSeparately.length">
           <span>köken</span>
-          <span>
-            <span class="d-flex align-items-center align-content-stretch justify-content-end flex-wrap" :class="{ 'mt-1': index > 0 }" :key="index" v-for="(origin, index) in item.origins">
+
+          <span class="flex flex-col space-y-2">
+            <span
+              class="flex flex-wrap items-center self-stretch justify-end space-x-2"
+              :class="{
+                'mt-1': index > 0
+              }"
+              :key="index"
+              v-for="(origin, index) in item.origins"
+            >
               <span>{{ origin.nameLocale | lowerCaseIt }}</span>
-              <img class="rounded-circle img-thumbnail border-light ml-2" :src="origin.flag.square" style="width: 1.75rem; height: 1.75rem" :title="origin.nameLocale | lowerCaseIt" />
+
+              <img
+                class="w-6 h-6 rounded-full border-2 border-white"
+                :class="{
+                  '-ml-2': index,
+                  'relative': origin.id === 1
+                }"
+                :src="origin.flag.square"
+                :title="origin.nameLocale | lowerCaseIt"
+              />
             </span>
           </span>
         </span>
       </main>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg mt-3" v-if="!loading && item.namesSeparately.length">
-      <header class="px-3 py-2">
-        <h3 class="m-0 line-height-1">köken</h3>
+    <section class="bg-white shadow-sm rounded" v-if="!loading && item.namesSeparately.length">
+      <header class="py-2 px-4">
+        <h3 class="text-3xl">köken</h3>
       </header>
 
-      <main class="list-group list-group-flush">
-        <span class="list-group-item d-flex align-items-center justify-content-between bg-transparent border-light line-height-1 px-3 py-2" v-for="name in item.namesSeparately" :key="name.name">
+      <main class="flex flex-col divide-y divide-gray-100">
+        <span class="flex items-center justify-between py-2 px-4" v-for="name in item.namesSeparately" :key="name.name">
           <span>{{ name.name | lowerCaseIt }}</span>
-          <span class="d-flex align-items-center justify-content-center">
+
+          <span class="flex flex-wrap items-center self-stretch justify-end space-x-2">
             <span>{{ name.origin.nameLocale | lowerCaseIt }}</span>
-            <img class="rounded-circle img-thumbnail border-light ml-2" :src="name.origin.flag.square" style="width: 1.75rem; height: 1.75rem" :title="name.origin.nameLocale | lowerCaseIt" />
+
+            <img
+              class="w-6 h-6 rounded-full border-2 border-white"
+              :src="name.origin.flag.square"
+              :title="name.origin.nameLocale | lowerCaseIt"
+            />
           </span>
         </span>
       </main>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg mt-3" v-if="!loading && item.significations.length">
-      <header class="px-3 py-2">
-        <h3 class="m-0 line-height-1">anlam</h3>
+    <section class="bg-white shadow-sm rounded" v-if="!loading && item.significations.length">
+      <header class="py-2 px-4">
+        <h3 class="text-3xl">anlam</h3>
       </header>
 
-      <main class="list-group list-group-flush">
-        <span class="list-group-item bg-transparent border-light px-3 py-2" :key="index" v-for="(signification, index) in item.significations" :inner-html.prop="signification | lowerCaseIt" />
+      <main class="flex flex-col divide-y divide-gray-100">
+        <span
+          class="flex items-center py-2 px-4"
+          :key="index"
+          v-for="(signification, index) in item.significations"
+          :inner-html.prop="signification | lowerCaseIt"
+        />
       </main>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg mt-3" v-if="!loading && item.description">
-      <header class="px-3 py-2">
-        <h3 class="m-0 line-height-1">not</h3>
+    <section class="bg-white shadow-sm rounded" v-if="!loading && item.description">
+      <header class="py-2 px-4">
+        <h3 class="text-3xl">not</h3>
       </header>
 
-      <main class="list-group list-group-flush">
-        <span class="list-group-item bg-transparent border-light px-3 py-2">{{ item.description | lowerCaseIt }}</span>
+      <main>
+        <p class="flex items-center py-2 px-4">{{ item.description | lowerCaseIt }}</p>
       </main>
     </section>
   </main>

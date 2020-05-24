@@ -16,6 +16,6 @@
        url("../../assets/fonts/space-mono-v4-latin-ext-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-body {
-  overflow-y: scroll;
+mark {
+  @apply bg-secondary-200;
 }

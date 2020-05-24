@@ -24,15 +24,15 @@ Vue.mixin({
           .replace(new RegExp('[sşSŞ]', 'gi'), '[sşSŞ]')
           .replace(new RegExp('[oöOÖ]', 'gi'), '[oöOÖ]')
         if (string.match(new RegExp(regex, 'gi'))) {
-          return string.replace(new RegExp(regex, 'gi'), str => `<span class="marker">${str}</span>`)
+          return string.replace(new RegExp(regex, 'gi'), str => `<mark>${str}</mark>`)
         }
       }
       return string
     },
 
-    lowerCaseIt: string => string.toLocaleLowerCase(),
+    lowerCaseIt: string => string.toLocaleLowerCase('tr-TR'),
 
-    upperCaseIt: string => string.toLocaleUpperCase()
+    upperCaseIt: string => string.toLocaleUpperCase('tr-TR')
   }
 })
 

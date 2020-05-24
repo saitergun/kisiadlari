@@ -1,96 +1,141 @@
 <template>
-  <main class="container p-3">
-    <section class="bg-white shadow-sm rounded-lg border">
-      <span class="d-block position-relative">
-        <input type="text" class="form-control form-control-lg rounded-lg placeholder-light py-2 px-4 h-auto border-0 text-center shadow-none" placeholder="ad ve anlam içinde ara" v-model="filter.query" @keyup.enter="$event.srcElement.blur(), filter.page = 1, updateRoute()" />
+  <main class="container space-y-4">
+    <section class="bg-white border rounded">
+      <span class="block relative">
+        <input
+          type="text"
+          class="w-full h-auto text-center text-xl placeholder-gray-500 bg-transparent focus:outline-none focus:shadow py-2 px-4"
+          placeholder="ad ve anlam içinde ara"
+          v-model="filter.query"
+          @keyup.enter="$event.srcElement.blur(), filter.page = 1, updateRoute()"
+        />
 
-        <button class="close font-weight-normal" style="position: absolute; top: 0; bottom: 0; right: 0; width: 3rem;" v-show="filter.query.length" @click="filter.query = '', $event.target.previousElementSibling.focus(), updateRoute() ">&times;</button>
+        <button
+          class="absolute top-0 right-0 w-10 h-10 flex items-center justify-center focus:outline-none active:bg-gray-100 focus:bg-gray-200 rounded-full text-gray-500 z-50 p-3 m-1"
+          v-show="filter.query.length"
+          @click="filter.query = '', $event.target.previousElementSibling.focus(), updateRoute()"
+        ><IconX /></button>
       </span>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg mt-3">
-      <header class="d-flex align-items-center justify-content-center border-bottom border-light m-0 py-2 px-3">
-        <span class="d-block font-weight-bolder line-height-1 m-0">köken</span>
+    <section class="bg-white shadow-sm rounded">
+      <header class="flex items-center justify-center border-b border-gray-100 py-2 px-4">
+        <span class="block font-semibold">köken</span>
       </header>
 
-      <main class="row no-gutters p-2">
-        <span class="col-4 col-sm-3" :key="origin.code" v-for="origin in origins">
-          <label class="d-flex justify-content-center cursor-pointer m-0 p-2" :for="origin.code">
-            <span>
-              <span class="custom-control custom-checkbox custom-control-textless custom-control-circle">
-                <input type="checkbox" :id="origin.code" class="custom-control-input" :value="origin.id" v-model="filter.origins" :disabled="(!countItems && !filter.origins.includes(origin.id))" @change="updateRoute" />
-                <label class="custom-control-label" :for="origin.code" />
-              </span>
+      <main class="grid grid-cols-3 sm:grid-cols-4 py-2 p-4">
+        <label class="flex flex-col items-center justify-center cursor-pointer p-2" :for="origin.code" :key="origin.code" v-for="origin in origins">
+          <input
+            type="checkbox"
+            class="cursor-pointer"
+            :id="origin.code"
+            :value="origin.id"
+            :disabled="(!countItems && !filter.origins.includes(origin.id))"
+            v-model="filter.origins"
+            @change="updateRoute"
+          />
 
-              <small class="d-block user-select-none text-center line-height-1 mt-2" :class="{ 'font-weight-bolder': origin.id === 1 }">{{ origin.nameLocale | lowerCaseIt }}</small>
-            </span>
-          </label>
-        </span>
+          <small
+            class="block select-none text-center lowercase mt-2"
+            :class="{
+              'font-semibold': origin.id === 1
+            }"
+          >{{ origin.nameLocale | lowerCaseIt }}</small>
+        </label>
       </main>
 
-      <footer class="row no-gutters border-top border-light">
-        <span class="col-12">
-          <label class="d-flex align-items-center justify-content-center mx-4 m-0 p-3" :class="{ 'cursor-pointer': filter.origins.length }" for="originsTypeExact">
+      <footer class="border-t border-gray-100">
+        <label
+          class="flex items-center justify-center p-3"
+          :class="{
+            'cursor-pointer': filter.origins.length
+          }"
+          for="originsTypeExact"
+        >
+          <input
+            type="checkbox"
+            id="originsTypeExact"
+            class="cursor-pointer"
+            v-model="filter.originsTypeExact"
+            :disabled="!filter.origins.length"
+            @change="updateRoute"
+          />
 
-            <span class="custom-control custom-switch custom-control-textless custom-control-circle">
-              <input type="checkbox" id="originsTypeExact" class="custom-control-input" v-model="filter.originsTypeExact" :disabled="!filter.origins.length" @change="updateRoute" />
-              <label class="custom-control-label" :class="{ 'cursor-default': !filter.origins.length }" />
-            </span>
-
-            <small class="d-block user-select-none text-center line-height-1 ml-2">kesin eşleşme</small>
-          </label>
-        </span>
+          <small class="block select-none text-center ml-2">kesin eşleşme</small>
+        </label>
       </footer>
     </section>
 
-    <section class="bg-white shadow-sm rounded-lg mt-3">
-      <header class="d-flex align-items-center justify-content-center border-bottom border-light m-0 py-2 px-3">
-        <span class="d-block font-weight-bolder line-height-1 m-0">cinsiyet</span>
+    <section class="bg-white shadow-sm rounded">
+      <header class="flex items-center justify-center border-b border-gray-100 py-2 px-4">
+        <span class="block font-semibold">cinsiyet</span>
       </header>
 
-      <main class="d-flex align-items-center justify-content-center p-2">
-        <label class="d-flex justify-content-center cursor-pointer m-0 p-2" :for="gender.id" :key="gender.id" v-for="gender in genders">
-          <span>
-            <span class="custom-control custom-checkbox custom-control-textless custom-control-circle">
-              <input type="checkbox" :id="gender.id" class="custom-control-input" :value="gender.id" v-model="filter.genders" :disabled="(!countItems && !filter.genders.includes(gender.id)) || (filter.genders.length > 1 && !filter.genders.includes(gender.id))" @change="updateRoute" />
-              <label class="custom-control-label" :for="gender.id" />
-            </span>
+      <main class="flex items-center justify-center py-2 p-4">
+        <label
+          class="flex flex-col items-center justify-center cursor-pointer p-2"
+          :for="gender.id"
+          :key="gender.id"
+          v-for="gender in genders"
+        >
+          <input
+            type="checkbox"
+            :id="gender.id"
+            class="cursor-pointer"
+            :value="gender.id"
+            v-model="filter.genders"
+            :disabled="(!countItems && !filter.genders.includes(gender.id)) || (filter.genders.length > 1 && !filter.genders.includes(gender.id))"
+            @change="updateRoute"
+          />
 
-            <small class="d-block user-select-none text-center line-height-1 mt-2">{{ gender.nameLocale | lowerCaseIt }}</small>
-          </span>
+          <small class="block select-none text-center lowercase mt-2">{{ gender.nameLocale | lowerCaseIt }}</small>
         </label>
       </main>
     </section>
 
     <section class="mt-3" v-if="items.length">
-      <FilterItem :item="item" :highlightText="filter.query" :isFirstItem="!index" :key="index" v-for="(item, index) in items" />
+      <FilterItem
+        :item="item"
+        :highlightText="filter.query"
+        :isFirstItem="!index"
+        :key="index"
+        v-for="(item, index) in items"
+      />
     </section>
 
-    <section class="mt-3">
-      <main class="py-2 px-3">
-        <p class="text-center line-height-1 m-0" v-if="itemsLoading && !items.length">ölçütlere uygun ad aranıyor</p>
-        <p class="text-center line-height-1 m-0" v-if="itemsLoading && items.length">daha fazla ad yükleniyor</p>
+    <section class="text-center py-2 mt-3">
+      <p v-if="itemsLoading && !items.length">ölçütlere uygun ad aranıyor</p>
+      <p v-if="itemsLoading && items.length">daha fazla ad yükleniyor</p>
 
-        <p class="text-center line-height-1 m-0" v-if="!itemsLoading && !items.length">aradığın ölçütlere uygun ad bulunamadı</p>
+      <p v-if="!itemsLoading && !items.length">aradığın ölçütlere uygun ad bulunamadı</p>
 
-        <p class="text-center line-height-1 m-0" v-if="!itemsLoading && countItems && !pagination.hasNextPage">{{ countItems }} adın tümü gösteriliyor</p>
+      <p v-if="!itemsLoading && countItems && !pagination.hasNextPage">{{ countItems }} adın tümü gösteriliyor</p>
 
-        <p class="text-center line-height-1 m-0" v-if="!itemsLoading && countItems && pagination.hasNextPage">{{ items.length }}/{{ countItems }} ad gösteriliyor</p>
+      <p v-if="!itemsLoading && countItems && pagination.hasNextPage">{{ items.length }}/{{ countItems }} ad gösteriliyor</p>
 
-        <div class="d-flex justify-content-center mt-3" v-if="!itemsLoading && countItems && pagination.hasNextPage">
-          <span class="btn btn-primary rounded-lg shadow-none cursor-pointer line-height-1" @click="getMoreItems">daha fazla</span>
-        </div>
-      </main>
+      <p class="flex justify-center mt-3" v-if="!itemsLoading && countItems && pagination.hasNextPage">
+        <button
+          class="bg-primary active:bg-primary-600 text-white rounded py-1 px-4"
+          @click="getMoreItems"
+        >DAHA FAZLA</button>
+      </p>
     </section>
   </main>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import FilterItem from '@/components/FilterItem'
+
+import FilterItem from '@/components/FilterItem.vue'
+import IconX from '../components/IconX.vue'
 
 export default {
   name: 'Names',
+
+  components: {
+    FilterItem,
+    IconX
+  },
 
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -106,10 +151,6 @@ export default {
 
   beforeRouteLeave (to, from, next) {
     next()
-  },
-
-  components: {
-    FilterItem
   },
 
   data () {

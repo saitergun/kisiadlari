@@ -63,7 +63,8 @@ export default {
     next(vm => {
       document.title = vm.appName
 
-      vm.clearSearchBox()
+      vm.query = ''
+      vm.items = []
     })
   },
 

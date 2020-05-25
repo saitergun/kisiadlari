@@ -1,1 +1,0 @@
-# kisi-adlari-sozlugu

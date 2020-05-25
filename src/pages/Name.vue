@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Name',
@@ -144,9 +144,9 @@ export default {
       return this.$router.currentRoute.params.id
     },
 
-    ...mapGetters('app', [
-      'appName'
-    ])
+    ...mapState('app', {
+      appName: 'name'
+    })
   },
 
   created () {

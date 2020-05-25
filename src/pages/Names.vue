@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import FilterItem from '@/components/FilterItem.vue'
 import IconX from '../components/IconX.vue'
@@ -173,9 +173,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters('app', [
-      'appName'
-    ]),
+    ...mapState('app', {
+      appName: 'name'
+    }),
 
     ...mapState('data', [
       'origins',

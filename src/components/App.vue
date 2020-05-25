@@ -1,16 +1,16 @@
 <template>
   <span>
-    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="!isReady && !errorText">
+    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="!isReady && !errorMessage">
       <span class="text-center text-primary p-4">
         <span class="text-2xl font-bold mt-4">yükleniyor</span>
       </span>
     </span>
 
-    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="errorText">
+    <span class="fixed w-screen h-screen flex items-center justify-center" v-if="errorMessage">
       <span class="text-center text-red-600 p-4">
         <span class="w-12 h-12 flex items-center justify-center bg-red-500 text-white leading-none text-4xl rounded-full m-auto">!</span>
 
-        <span class="block mt-5">{{ errorText }}</span>
+        <span class="block mt-5">{{ errorMessage }}</span>
       </span>
     </span>
 
@@ -48,7 +48,7 @@ export default {
     ...mapState('app', [
       'name',
       'isReady',
-      'errorText'
+      'errorMessage'
     ])
   },
 

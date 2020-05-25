@@ -1,38 +1,171 @@
 import names from '../data/names.json'
 
+const origins = [
+  {
+    id: 2,
+    code: 'ara',
+    name: 'arabic',
+    nameLocale: 'arapça',
+    nameTdk: 'ar.',
+    flag: {
+      square: require('../assets/images/flags/1x1/ara.svg'),
+      rectangle: require('../assets/images/flags/4x3/ara.svg')
+    }
+  },
+  {
+    id: 3,
+    code: 'pes',
+    name: 'persian',
+    nameLocale: 'farsça',
+    nameTdk: 'far.',
+    flag: {
+      square: require('../assets/images/flags/1x1/pes.svg'),
+      rectangle: require('../assets/images/flags/4x3/pes.svg')
+    }
+  }, // İran Farsçası
+  {
+    id: 7,
+    code: 'fra',
+    name: 'french',
+    nameLocale: 'fransızca',
+    nameTdk: 'fr.',
+    flag: {
+      square: require('../assets/images/flags/1x1/fra.svg'),
+      rectangle: require('../assets/images/flags/4x3/fra.svg')
+    }
+  },
+  {
+    id: 12,
+    code: 'kat',
+    name: 'georgian',
+    nameLocale: 'gürcüce',
+    nameTdk: 'gürcüce',
+    flag: {
+      square: require('../assets/images/flags/1x1/kat.svg'),
+      rectangle: require('../assets/images/flags/4x3/kat.svg')
+    }
+  },
+  {
+    id: 6,
+    code: 'heb',
+    name: 'hebrew',
+    nameLocale: 'ibranice',
+    nameTdk: 'ibr.',
+    flag: {
+      square: require('../assets/images/flags/1x1/heb.svg'),
+      rectangle: require('../assets/images/flags/4x3/heb.svg')
+    }
+  },
+  {
+    id: 11,
+    code: 'eng',
+    name: 'english',
+    nameLocale: 'ingilizce',
+    nameTdk: 'ing.',
+    flag: {
+      square: require('../assets/images/flags/1x1/eng.svg'),
+      rectangle: require('../assets/images/flags/4x3/eng.svg')
+    }
+  },
+  {
+    id: 9,
+    code: 'ita',
+    name: 'italian',
+    nameLocale: 'italyanca',
+    nameTdk: 'it.',
+    flag: {
+      square: require('../assets/images/flags/1x1/ita.svg'),
+      rectangle: require('../assets/images/flags/4x3/ita.svg')
+    }
+  },
+  {
+    id: 5,
+    code: 'mon',
+    name: 'mongolian',
+    nameLocale: 'moğolca',
+    nameTdk: 'moğ.',
+    flag: {
+      square: require('../assets/images/flags/1x1/mon.svg'),
+      rectangle: require('../assets/images/flags/4x3/mon.svg')
+    }
+  },
+  {
+    id: 8,
+    code: 'pnt',
+    name: 'pontic',
+    nameLocale: 'rumca',
+    nameTdk: 'rum.',
+    flag: {
+      square: require('../assets/images/flags/1x1/pnt.svg'),
+      rectangle: require('../assets/images/flags/4x3/pnt.svg')
+    }
+  }, // Pontusça, Pontus Rumcası
+  {
+    id: 10,
+    code: 'sog',
+    name: 'sogdian',
+    nameLocale: 'soğdca',
+    nameTdk: 'soğd.',
+    flag: {
+      square: require('../assets/images/flags/1x1/sog.svg'),
+      rectangle: require('../assets/images/flags/4x3/sog.svg')
+    }
+  },
+  {
+    id: 1,
+    code: 'tur',
+    name: 'turkish',
+    nameLocale: 'türkçe',
+    nameTdk: 't.',
+    flag: {
+      square: require('../assets/images/flags/1x1/tur.svg'),
+      rectangle: require('../assets/images/flags/4x3/tur.svg')
+    }
+  },
+  {
+    id: 4,
+    code: 'grc',
+    name: 'greek',
+    nameLocale: 'yunanca',
+    nameTdk: 'yun.',
+    flag: {
+      square: require('../assets/images/flags/1x1/grc.svg'),
+      rectangle: require('../assets/images/flags/4x3/grc.svg')
+    }
+  } // Antik Yunanca
+]
+
+const genders = [
+  {
+    id: 1,
+    name: 'female',
+    nameLocale: 'dişi'
+  },
+  {
+    id: 2,
+    name: 'male',
+    nameLocale: 'erkek'
+  },
+  {
+    id: 3,
+    name: 'unisex',
+    nameLocale: 'üniseks'
+  }
+]
+
 export default {
   namespaced: true,
 
   state: {
-    origins: [
-      { id: 2, code: 'ara', name: 'Arabic', nameLocale: 'Arapça', nameTdk: 'Ar.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/ara.svg' } },
-      { id: 3, code: 'pes', name: 'Persian', nameLocale: 'Farsça', nameTdk: 'Far.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/pes.svg' } }, // İran Farsçası
-      { id: 7, code: 'fra', name: 'French', nameLocale: 'Fransızca', nameTdk: 'Fr.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/fra.svg' } },
-      { id: 12, code: 'kat', name: 'Georgian', nameLocale: 'Gürcüce', nameTdk: 'Gürcüce', flag: { square: process.env.BASE_URL + 'img/flag/1x1/kat.svg' } },
-      { id: 6, code: 'heb', name: 'Hebrew', nameLocale: 'İbranice', nameTdk: 'İbr.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/heb.svg' } },
-      { id: 11, code: 'eng', name: 'English', nameLocale: 'İngilizce', nameTdk: 'İng.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/eng.svg' } },
-      { id: 9, code: 'ita', name: 'Italian', nameLocale: 'İtalyanca', nameTdk: 'İt.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/ita.svg' } },
-      { id: 5, code: 'mon', name: 'Mongolian', nameLocale: 'Moğolca', nameTdk: 'Moğ.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/mon.svg' } },
-      { id: 8, code: 'pnt', name: 'Pontic', nameLocale: 'Rumca', nameTdk: 'Rum.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/pnt.svg' } }, // Pontusça, Pontus Rumcası
-      { id: 10, code: 'sog', name: 'Sogdian', nameLocale: 'Soğdca', nameTdk: 'Soğd.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/sog.svg' } },
-      { id: 1, code: 'tur', name: 'Turkish', nameLocale: 'Türkçe', nameTdk: 'T.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/tur.svg' } },
-      { id: 4, code: 'grc', name: 'Greek', nameLocale: 'Yunanca', nameTdk: 'Yun.', flag: { square: process.env.BASE_URL + 'img/flag/1x1/grc.svg' } } // Antik Yunanca
-    ],
-
-    genders: [
-      { id: 1, name: 'Female', nameLocale: 'Dişi' },
-      { id: 2, name: 'Male', nameLocale: 'Erkek' },
-      { id: 3, name: 'Unisex', nameLocale: 'Üniseks' }
-    ],
+    origins,
+    genders,
 
     names: []
   },
 
-  getters: {},
-
   mutations: {
-    pushNames (s, p) {
-      s.names.push(...p)
+    pushNames (state, payload) {
+      state.names.push(...payload)
     }
   },
 

@@ -16,9 +16,9 @@
         <h3
           class="flex items-center justify-start cursor-pointer text-2xl"
           :class="{
-            'text-female': item.gender.name === 'Female',
-            'text-male': item.gender.name === 'Male',
-            'text-unisex': item.gender.name === 'Unisex',
+            'text-female': item.gender.name === 'female',
+            'text-male': item.gender.name === 'male',
+            'text-unisex': item.gender.name === 'unisex',
           }"
           :inner-html.prop="item.name | upperCaseIt | highlightText(highlightText)"
         />
@@ -58,9 +58,9 @@
       <button
         class="block w-full border-t border-gray-100 text-center cursor-pointer py-2 px-4"
         :class="{
-          'text-female': item.gender.name === 'Female',
-          'text-male': item.gender.name === 'Male',
-          'text-unisex': item.gender.name === 'Unisex',
+          'text-female': item.gender.name === 'female',
+          'text-male': item.gender.name === 'male',
+          'text-unisex': item.gender.name === 'unisex',
         }"
         v-show="!showAllSignifications && item.significations.length > 2"
         @click="showAllSignifications = true"

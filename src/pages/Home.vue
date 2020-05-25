@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import IconX from '../components/IconX.vue'
 
@@ -75,9 +75,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters('app', [
-      'appName'
-    ])
+    ...mapState('app', {
+      appName: 'name'
+    })
   },
 
   methods: {

@@ -3,33 +3,28 @@ import store from '../store'
 export default {
   namespaced: true,
 
-  state () {
-    return {
-      name: 'kişi adları sözlüğü',
-      publicPath: process.env.BASE_URL,
+  state: {
+    name: 'kişi adları sözlüğü',
 
-      isReady: false,
-      errorText: null
-    }
-  },
-
-  getters: {
-    appName: s => s.name
+    isReady: false,
+    errorMessage: null
   },
 
   mutations: {
-    setReady (s, p) {
-      s.isReady = p
+    setIsReady (state, payload) {
+      state.isReady = payload
     },
 
-    setErrorText (s, p) {
-      s.errorText = p
+    setErrorMessage (state, payload) {
+      state.errorMessage = payload
     }
   },
 
   actions: {
     start ({ commit }) {
-      store.dispatch('data/check').then(() => commit('setReady', true)).catch(error => commit('setErrorText', error))
+      store.dispatch('data/check')
+        .then(() => commit('setIsReady', true))
+        .catch(error => commit('setErrorMessage', error))
     }
   }
 }

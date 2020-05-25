@@ -17,7 +17,8 @@ export default {
   name: 'NotFound',
 
   created () {
-    document.title = 'sayfa bulunamadı · ' + this.$store.state.app.name
+    document.title = `sayfa bulunamadı · ${this.$store.state.app.name}`
+    this.$store.commit('app/setTitle', 'sayfa bulunamadı')
   }
 }
 </script>

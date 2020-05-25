@@ -5,12 +5,17 @@ export default {
 
   state: {
     name: 'kişi adları sözlüğü',
+    title: 'kişi adları sözlüğü',
 
     isReady: false,
     errorMessage: null
   },
 
   mutations: {
+    setTitle (state, payload) {
+      state.title = payload
+    },
+
     setIsReady (state, payload) {
       state.isReady = payload
     },

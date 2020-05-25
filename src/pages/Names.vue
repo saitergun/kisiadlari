@@ -137,18 +137,6 @@ export default {
     IconX
   },
 
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      document.title = 'süzgeç · ' + vm.appName
-    })
-  },
-
-  beforeRouteUpdate (to, from, next) {
-    next(vm => {
-      document.title = 'süzgeç · ' + vm.appName
-    })
-  },
-
   beforeRouteLeave (to, from, next) {
     next()
   },
@@ -237,6 +225,12 @@ export default {
   },
 
   created () {
+    document.title = `süzgeç · ${this.appName}`
+    this.$store.commit('app/setTitle', 'süzgeç')
+
+    this.query = ''
+    this.items = []
+
     if (this.$router.currentRoute.query.q !== undefined) {
       this.filter.query = this.$router.currentRoute.query.q
     }

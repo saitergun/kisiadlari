@@ -15,19 +15,17 @@
     </span>
 
     <nav class="sticky left-0 top-0 right-0 w-full h-12 flex items-center justify-center bg-primary shadow z-40" v-if="isReady">
-      <span class="flex items-center justify-center relative w-full h-12 max-w-md px-4">
-        <h1
-          class="block text-center text-xl text-white cursor-pointer p-2"
-          :title="name"
-          v-if="$route.name === 'routeHome'"
-        >{{ name }}</h1>
+      <span class="flex items-center justify-center relative w-full h-12 max-w-md sm:px-4">
+        <button
+          class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center active:bg-primary-600 text-white rounded-full focus:outline-none p-2 mt-1 ml-1"
+          @click="$router.back()"
+          v-if="!isHomePage"
+        ><IconArrowLeft /></button>
 
-        <router-link
-          class="block text-center text-xl text-white cursor-pointer p-2"
-          to="/"
-          :title="name"
-          v-else
-        >{{ name }}</router-link>
+        <h1
+          class="block text-center text-xl text-white select-none p-2"
+          :title="title"
+        >{{ title }}</h1>
       </span>
     </nav>
 
@@ -41,15 +39,26 @@
 <script>
 import { mapState } from 'vuex'
 
+import IconArrowLeft from './IconArrowLeft.vue'
+
 export default {
   name: 'App',
+
+  components: {
+    IconArrowLeft
+  },
 
   computed: {
     ...mapState('app', [
       'name',
+      'title',
       'isReady',
       'errorMessage'
-    ])
+    ]),
+
+    isHomePage () {
+      return this.$route.path === '/'
+    }
   },
 
   created () {

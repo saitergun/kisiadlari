@@ -59,15 +59,6 @@ export default {
     IconX
   },
 
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      document.title = vm.appName
-
-      vm.query = ''
-      vm.items = []
-    })
-  },
-
   data () {
     return {
       query: '',
@@ -104,6 +95,14 @@ export default {
 
       document.querySelector('input').focus()
     }
+  },
+
+  created () {
+    document.title = this.appName
+    this.$store.commit('app/setTitle', this.appName)
+
+    this.query = ''
+    this.items = []
   }
 }
 </script>

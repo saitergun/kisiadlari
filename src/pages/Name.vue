@@ -151,7 +151,8 @@ export default {
 
   created () {
     this.$store.dispatch('api/nameById', this.id).then(response => {
-      document.title = response.name.toLocaleUpperCase() + ' · ' + this.appName
+      document.title = `${response.name.toLocaleUpperCase()} · ${this.appName}`
+      this.$store.commit('app/setTitle', response.name.toLocaleUpperCase())
 
       this.item = response
       this.loading = false

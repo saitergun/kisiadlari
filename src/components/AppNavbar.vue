@@ -37,7 +37,7 @@ export default {
     showBackButton: {
       type: Boolean,
       default: () => false
-    },
+    }
   }
 }
 </script>

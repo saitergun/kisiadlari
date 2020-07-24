@@ -1,14 +1,8 @@
-const webpack = require('webpack')
 const SWPrecache = require('sw-precache-webpack-plugin')
 
 const plugins = []
 
 if (process.env.NODE_ENV === 'production') {
-  // remove moment unused languages
-  plugins.push(
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-  )
-
   // https://github.com/GoogleChromeLabs/sw-precache/issues/379#issuecomment-455141742
   plugins.push(
     new SWPrecache({

@@ -103,6 +103,10 @@ export default {
 
     this.query = ''
     this.items = []
+  },
+
+  mounted () {
+    this.clearSearchBox()
   }
 }
 </script>
